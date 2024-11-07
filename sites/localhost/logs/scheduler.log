@@ -1,0 +1,580 @@
+2024-10-09 11:38:00,958 ERROR scheduler Exception in Enqueue Events for Site localhost
+Traceback (most recent call last):
+  File "/mnt/frappe-axe/apps/frappe/frappe/utils/scheduler.py", line 106, in enqueue_events_for_site
+    if is_scheduler_inactive():
+       ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/frappe-axe/apps/frappe/frappe/utils/scheduler.py", line 150, in is_scheduler_inactive
+    if is_scheduler_disabled(verbose=verbose):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/frappe-axe/apps/frappe/frappe/utils/scheduler.py", line 163, in is_scheduler_disabled
+    frappe.db.get_single_value("System Settings", "enable_scheduler")
+  File "/mnt/frappe-axe/apps/frappe/frappe/database/database.py", line 845, in get_single_value
+    ).run()
+      ^^^^^
+  File "/mnt/frappe-axe/apps/frappe/frappe/query_builder/utils.py", line 84, in execute_query
+    result = frappe.db.sql(query, params, *args, **kwargs)  # nosemgrep
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/frappe-axe/apps/frappe/frappe/database/database.py", line 212, in sql
+    self.connect()
+  File "/mnt/frappe-axe/apps/frappe/frappe/database/database.py", line 117, in connect
+    self._conn: "MariadbConnection" | "PostgresConnection" = self.get_connection()
+                                                             ^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/frappe-axe/apps/frappe/frappe/database/mariadb/database.py", line 107, in get_connection
+    conn = self._get_connection()
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/frappe-axe/apps/frappe/frappe/database/mariadb/database.py", line 113, in _get_connection
+    return self.create_connection()
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/frappe-axe/apps/frappe/frappe/database/mariadb/database.py", line 116, in create_connection
+    return pymysql.connect(**self.get_connection_settings())
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/frappe-axe/env/lib/python3.12/site-packages/pymysql/connections.py", line 361, in __init__
+    self.connect()
+  File "/mnt/frappe-axe/env/lib/python3.12/site-packages/pymysql/connections.py", line 669, in connect
+    self._request_authentication()
+  File "/mnt/frappe-axe/env/lib/python3.12/site-packages/pymysql/connections.py", line 957, in _request_authentication
+    auth_packet = self._read_packet()
+                  ^^^^^^^^^^^^^^^^^^^
+  File "/mnt/frappe-axe/env/lib/python3.12/site-packages/pymysql/connections.py", line 775, in _read_packet
+    packet.raise_for_error()
+  File "/mnt/frappe-axe/env/lib/python3.12/site-packages/pymysql/protocol.py", line 219, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "/mnt/frappe-axe/env/lib/python3.12/site-packages/pymysql/err.py", line 150, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.OperationalError: (1045, "Access denied for user '_d2f95ab440fd4ba4'@'localhost' (using password: YES)")
+2024-10-09 15:46:00,971 ERROR scheduler Exception in Enqueue Events for Site localhost
+Traceback (most recent call last):
+  File "/mnt/frappe-axe/env/lib/python3.12/site-packages/redis/connection.py", line 1080, in get_connection
+    if connection.can_read():
+       ^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/frappe-axe/env/lib/python3.12/site-packages/redis/connection.py", line 490, in can_read
+    return self._parser.can_read(timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/frappe-axe/env/lib/python3.12/site-packages/redis/_parsers/hiredis.py", line 81, in can_read
+    return self.read_from_socket(timeout=timeout, raise_on_timeout=False)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/frappe-axe/env/lib/python3.12/site-packages/redis/_parsers/hiredis.py", line 92, in read_from_socket
+    raise ConnectionError(SERVER_CLOSED_CONNECTION_ERROR)
+redis.exceptions.ConnectionError: Connection closed by server.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mnt/frappe-axe/env/lib/python3.12/site-packages/redis/connection.py", line 277, in connect
+    sock = self.retry.call_with_retry(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/frappe-axe/env/lib/python3.12/site-packages/redis/retry.py", line 62, in call_with_retry
+    return do()
+           ^^^^
+  File "/mnt/frappe-axe/env/lib/python3.12/site-packages/redis/connection.py", line 278, in <lambda>
+    lambda: self._connect(), lambda error: self.disconnect(error)
+            ^^^^^^^^^^^^^^^
+  File "/mnt/frappe-axe/env/lib/python3.12/site-packages/redis/connection.py", line 639, in _connect
+    raise err
+  File "/mnt/frappe-axe/env/lib/python3.12/site-packages/redis/connection.py", line 627, in _connect
+    sock.connect(socket_address)
+ConnectionRefusedError: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mnt/frappe-axe/apps/frappe/frappe/utils/scheduler.py", line 109, in enqueue_events_for_site
+    enqueue_events()
+  File "/mnt/frappe-axe/apps/frappe/frappe/utils/scheduler.py", line 129, in enqueue_events
+    if job_type.enqueue():
+       ^^^^^^^^^^^^^^^^^^
+  File "/mnt/frappe-axe/apps/frappe/frappe/core/doctype/scheduled_job_type/scheduled_job_type.py", line 70, in enqueue
+    if not self.is_job_in_queue():
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/frappe-axe/apps/frappe/frappe/core/doctype/scheduled_job_type/scheduled_job_type.py", line 92, in is_job_in_queue
+    return is_job_enqueued(self.rq_job_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/frappe-axe/apps/frappe/frappe/utils/background_jobs.py", line 603, in is_job_enqueued
+    return get_job_status(job_id) in (JobStatus.QUEUED, JobStatus.STARTED)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/frappe-axe/apps/frappe/frappe/utils/background_jobs.py", line 608, in get_job_status
+    if job := get_job(job_id):
+              ^^^^^^^^^^^^^^^
+  File "/mnt/frappe-axe/apps/frappe/frappe/utils/background_jobs.py", line 614, in get_job
+    return Job.fetch(create_job_id(job_id), connection=get_redis_conn())
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/frappe-axe/env/lib/python3.12/site-packages/rq/job.py", line 591, in fetch
+    job.refresh()
+  File "/mnt/frappe-axe/env/lib/python3.12/site-packages/rq/job.py", line 991, in refresh
+    data = self.connection.hgetall(self.key)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/frappe-axe/env/lib/python3.12/site-packages/redis/commands/core.py", line 4966, in hgetall
+    return self.execute_command("HGETALL", name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/frappe-axe/env/lib/python3.12/site-packages/redis/client.py", line 545, in execute_command
+    conn = self.connection or pool.get_connection(command_name, **options)
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/frappe-axe/env/lib/python3.12/site-packages/redis/connection.py", line 1084, in get_connection
+    connection.connect()
+  File "/mnt/frappe-axe/env/lib/python3.12/site-packages/redis/connection.py", line 283, in connect
+    raise ConnectionError(self._error_message(e))
+redis.exceptions.ConnectionError: Error 111 connecting to 127.0.0.1:11001. Connection refused.
+2024-10-09 15:50:01,119 ERROR scheduler Exception in Enqueue Events for Site localhost
+Traceback (most recent call last):
+  File "/mnt/frappe-axe/env/lib/python3.12/site-packages/redis/connection.py", line 277, in connect
+    sock = self.retry.call_with_retry(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/frappe-axe/env/lib/python3.12/site-packages/redis/retry.py", line 62, in call_with_retry
+    return do()
+           ^^^^
+  File "/mnt/frappe-axe/env/lib/python3.12/site-packages/redis/connection.py", line 278, in <lambda>
+    lambda: self._connect(), lambda error: self.disconnect(error)
+            ^^^^^^^^^^^^^^^
+  File "/mnt/frappe-axe/env/lib/python3.12/site-packages/redis/connection.py", line 639, in _connect
+    raise err
+  File "/mnt/frappe-axe/env/lib/python3.12/site-packages/redis/connection.py", line 627, in _connect
+    sock.connect(socket_address)
+ConnectionRefusedError: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mnt/frappe-axe/apps/frappe/frappe/utils/scheduler.py", line 109, in enqueue_events_for_site
+    enqueue_events()
+  File "/mnt/frappe-axe/apps/frappe/frappe/utils/scheduler.py", line 129, in enqueue_events
+    if job_type.enqueue():
+       ^^^^^^^^^^^^^^^^^^
+  File "/mnt/frappe-axe/apps/frappe/frappe/core/doctype/scheduled_job_type/scheduled_job_type.py", line 70, in enqueue
+    if not self.is_job_in_queue():
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/frappe-axe/apps/frappe/frappe/core/doctype/scheduled_job_type/scheduled_job_type.py", line 92, in is_job_in_queue
+    return is_job_enqueued(self.rq_job_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/frappe-axe/apps/frappe/frappe/utils/background_jobs.py", line 603, in is_job_enqueued
+    return get_job_status(job_id) in (JobStatus.QUEUED, JobStatus.STARTED)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/frappe-axe/apps/frappe/frappe/utils/background_jobs.py", line 608, in get_job_status
+    if job := get_job(job_id):
+              ^^^^^^^^^^^^^^^
+  File "/mnt/frappe-axe/apps/frappe/frappe/utils/background_jobs.py", line 614, in get_job
+    return Job.fetch(create_job_id(job_id), connection=get_redis_conn())
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/frappe-axe/env/lib/python3.12/site-packages/rq/job.py", line 591, in fetch
+    job.refresh()
+  File "/mnt/frappe-axe/env/lib/python3.12/site-packages/rq/job.py", line 991, in refresh
+    data = self.connection.hgetall(self.key)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/frappe-axe/env/lib/python3.12/site-packages/redis/commands/core.py", line 4966, in hgetall
+    return self.execute_command("HGETALL", name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/frappe-axe/env/lib/python3.12/site-packages/redis/client.py", line 545, in execute_command
+    conn = self.connection or pool.get_connection(command_name, **options)
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/frappe-axe/env/lib/python3.12/site-packages/redis/connection.py", line 1074, in get_connection
+    connection.connect()
+  File "/mnt/frappe-axe/env/lib/python3.12/site-packages/redis/connection.py", line 283, in connect
+    raise ConnectionError(self._error_message(e))
+redis.exceptions.ConnectionError: Error 111 connecting to 127.0.0.1:11001. Connection refused.
+2024-10-09 15:54:00,398 ERROR scheduler Exception in Enqueue Events for Site localhost
+Traceback (most recent call last):
+  File "/mnt/frappe-axe/env/lib/python3.12/site-packages/redis/connection.py", line 277, in connect
+    sock = self.retry.call_with_retry(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/frappe-axe/env/lib/python3.12/site-packages/redis/retry.py", line 62, in call_with_retry
+    return do()
+           ^^^^
+  File "/mnt/frappe-axe/env/lib/python3.12/site-packages/redis/connection.py", line 278, in <lambda>
+    lambda: self._connect(), lambda error: self.disconnect(error)
+            ^^^^^^^^^^^^^^^
+  File "/mnt/frappe-axe/env/lib/python3.12/site-packages/redis/connection.py", line 639, in _connect
+    raise err
+  File "/mnt/frappe-axe/env/lib/python3.12/site-packages/redis/connection.py", line 627, in _connect
+    sock.connect(socket_address)
+ConnectionRefusedError: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mnt/frappe-axe/apps/frappe/frappe/utils/scheduler.py", line 109, in enqueue_events_for_site
+    enqueue_events()
+  File "/mnt/frappe-axe/apps/frappe/frappe/utils/scheduler.py", line 129, in enqueue_events
+    if job_type.enqueue():
+       ^^^^^^^^^^^^^^^^^^
+  File "/mnt/frappe-axe/apps/frappe/frappe/core/doctype/scheduled_job_type/scheduled_job_type.py", line 70, in enqueue
+    if not self.is_job_in_queue():
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/frappe-axe/apps/frappe/frappe/core/doctype/scheduled_job_type/scheduled_job_type.py", line 92, in is_job_in_queue
+    return is_job_enqueued(self.rq_job_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/frappe-axe/apps/frappe/frappe/utils/background_jobs.py", line 603, in is_job_enqueued
+    return get_job_status(job_id) in (JobStatus.QUEUED, JobStatus.STARTED)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/frappe-axe/apps/frappe/frappe/utils/background_jobs.py", line 608, in get_job_status
+    if job := get_job(job_id):
+              ^^^^^^^^^^^^^^^
+  File "/mnt/frappe-axe/apps/frappe/frappe/utils/background_jobs.py", line 614, in get_job
+    return Job.fetch(create_job_id(job_id), connection=get_redis_conn())
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/frappe-axe/env/lib/python3.12/site-packages/rq/job.py", line 591, in fetch
+    job.refresh()
+  File "/mnt/frappe-axe/env/lib/python3.12/site-packages/rq/job.py", line 991, in refresh
+    data = self.connection.hgetall(self.key)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/frappe-axe/env/lib/python3.12/site-packages/redis/commands/core.py", line 4966, in hgetall
+    return self.execute_command("HGETALL", name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/frappe-axe/env/lib/python3.12/site-packages/redis/client.py", line 545, in execute_command
+    conn = self.connection or pool.get_connection(command_name, **options)
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/frappe-axe/env/lib/python3.12/site-packages/redis/connection.py", line 1074, in get_connection
+    connection.connect()
+  File "/mnt/frappe-axe/env/lib/python3.12/site-packages/redis/connection.py", line 283, in connect
+    raise ConnectionError(self._error_message(e))
+redis.exceptions.ConnectionError: Error 111 connecting to 127.0.0.1:11001. Connection refused.
+2024-10-09 15:58:00,544 ERROR scheduler Exception in Enqueue Events for Site localhost
+Traceback (most recent call last):
+  File "/mnt/frappe-axe/env/lib/python3.12/site-packages/redis/connection.py", line 277, in connect
+    sock = self.retry.call_with_retry(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/frappe-axe/env/lib/python3.12/site-packages/redis/retry.py", line 62, in call_with_retry
+    return do()
+           ^^^^
+  File "/mnt/frappe-axe/env/lib/python3.12/site-packages/redis/connection.py", line 278, in <lambda>
+    lambda: self._connect(), lambda error: self.disconnect(error)
+            ^^^^^^^^^^^^^^^
+  File "/mnt/frappe-axe/env/lib/python3.12/site-packages/redis/connection.py", line 639, in _connect
+    raise err
+  File "/mnt/frappe-axe/env/lib/python3.12/site-packages/redis/connection.py", line 627, in _connect
+    sock.connect(socket_address)
+ConnectionRefusedError: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mnt/frappe-axe/apps/frappe/frappe/utils/scheduler.py", line 109, in enqueue_events_for_site
+    enqueue_events()
+  File "/mnt/frappe-axe/apps/frappe/frappe/utils/scheduler.py", line 129, in enqueue_events
+    if job_type.enqueue():
+       ^^^^^^^^^^^^^^^^^^
+  File "/mnt/frappe-axe/apps/frappe/frappe/core/doctype/scheduled_job_type/scheduled_job_type.py", line 70, in enqueue
+    if not self.is_job_in_queue():
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/frappe-axe/apps/frappe/frappe/core/doctype/scheduled_job_type/scheduled_job_type.py", line 92, in is_job_in_queue
+    return is_job_enqueued(self.rq_job_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/frappe-axe/apps/frappe/frappe/utils/background_jobs.py", line 603, in is_job_enqueued
+    return get_job_status(job_id) in (JobStatus.QUEUED, JobStatus.STARTED)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/frappe-axe/apps/frappe/frappe/utils/background_jobs.py", line 608, in get_job_status
+    if job := get_job(job_id):
+              ^^^^^^^^^^^^^^^
+  File "/mnt/frappe-axe/apps/frappe/frappe/utils/background_jobs.py", line 614, in get_job
+    return Job.fetch(create_job_id(job_id), connection=get_redis_conn())
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/frappe-axe/env/lib/python3.12/site-packages/rq/job.py", line 591, in fetch
+    job.refresh()
+  File "/mnt/frappe-axe/env/lib/python3.12/site-packages/rq/job.py", line 991, in refresh
+    data = self.connection.hgetall(self.key)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/frappe-axe/env/lib/python3.12/site-packages/redis/commands/core.py", line 4966, in hgetall
+    return self.execute_command("HGETALL", name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/frappe-axe/env/lib/python3.12/site-packages/redis/client.py", line 545, in execute_command
+    conn = self.connection or pool.get_connection(command_name, **options)
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/frappe-axe/env/lib/python3.12/site-packages/redis/connection.py", line 1074, in get_connection
+    connection.connect()
+  File "/mnt/frappe-axe/env/lib/python3.12/site-packages/redis/connection.py", line 283, in connect
+    raise ConnectionError(self._error_message(e))
+redis.exceptions.ConnectionError: Error 111 connecting to 127.0.0.1:11001. Connection refused.
+2024-10-28 10:42:01,064 ERROR scheduler Exception in Enqueue Events for Site localhost
+Traceback (most recent call last):
+  File "/mnt/frappe-axe/env/lib/python3.12/site-packages/redis/connection.py", line 1080, in get_connection
+    if connection.can_read():
+       ^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/frappe-axe/env/lib/python3.12/site-packages/redis/connection.py", line 490, in can_read
+    return self._parser.can_read(timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/frappe-axe/env/lib/python3.12/site-packages/redis/_parsers/hiredis.py", line 81, in can_read
+    return self.read_from_socket(timeout=timeout, raise_on_timeout=False)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/frappe-axe/env/lib/python3.12/site-packages/redis/_parsers/hiredis.py", line 92, in read_from_socket
+    raise ConnectionError(SERVER_CLOSED_CONNECTION_ERROR)
+redis.exceptions.ConnectionError: Connection closed by server.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mnt/frappe-axe/env/lib/python3.12/site-packages/redis/connection.py", line 277, in connect
+    sock = self.retry.call_with_retry(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/frappe-axe/env/lib/python3.12/site-packages/redis/retry.py", line 62, in call_with_retry
+    return do()
+           ^^^^
+  File "/mnt/frappe-axe/env/lib/python3.12/site-packages/redis/connection.py", line 278, in <lambda>
+    lambda: self._connect(), lambda error: self.disconnect(error)
+            ^^^^^^^^^^^^^^^
+  File "/mnt/frappe-axe/env/lib/python3.12/site-packages/redis/connection.py", line 639, in _connect
+    raise err
+  File "/mnt/frappe-axe/env/lib/python3.12/site-packages/redis/connection.py", line 627, in _connect
+    sock.connect(socket_address)
+ConnectionRefusedError: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mnt/frappe-axe/apps/frappe/frappe/utils/scheduler.py", line 109, in enqueue_events_for_site
+    enqueue_events()
+  File "/mnt/frappe-axe/apps/frappe/frappe/utils/scheduler.py", line 129, in enqueue_events
+    if job_type.enqueue():
+       ^^^^^^^^^^^^^^^^^^
+  File "/mnt/frappe-axe/apps/frappe/frappe/core/doctype/scheduled_job_type/scheduled_job_type.py", line 70, in enqueue
+    if not self.is_job_in_queue():
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/frappe-axe/apps/frappe/frappe/core/doctype/scheduled_job_type/scheduled_job_type.py", line 92, in is_job_in_queue
+    return is_job_enqueued(self.rq_job_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/frappe-axe/apps/frappe/frappe/utils/background_jobs.py", line 603, in is_job_enqueued
+    return get_job_status(job_id) in (JobStatus.QUEUED, JobStatus.STARTED)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/frappe-axe/apps/frappe/frappe/utils/background_jobs.py", line 608, in get_job_status
+    if job := get_job(job_id):
+              ^^^^^^^^^^^^^^^
+  File "/mnt/frappe-axe/apps/frappe/frappe/utils/background_jobs.py", line 614, in get_job
+    return Job.fetch(create_job_id(job_id), connection=get_redis_conn())
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/frappe-axe/env/lib/python3.12/site-packages/rq/job.py", line 591, in fetch
+    job.refresh()
+  File "/mnt/frappe-axe/env/lib/python3.12/site-packages/rq/job.py", line 991, in refresh
+    data = self.connection.hgetall(self.key)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/frappe-axe/env/lib/python3.12/site-packages/redis/commands/core.py", line 4966, in hgetall
+    return self.execute_command("HGETALL", name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/frappe-axe/env/lib/python3.12/site-packages/redis/client.py", line 545, in execute_command
+    conn = self.connection or pool.get_connection(command_name, **options)
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/frappe-axe/env/lib/python3.12/site-packages/redis/connection.py", line 1084, in get_connection
+    connection.connect()
+  File "/mnt/frappe-axe/env/lib/python3.12/site-packages/redis/connection.py", line 283, in connect
+    raise ConnectionError(self._error_message(e))
+redis.exceptions.ConnectionError: Error 111 connecting to 127.0.0.1:11001. Connection refused.
+2024-10-28 10:46:00,928 ERROR scheduler Exception in Enqueue Events for Site localhost
+Traceback (most recent call last):
+  File "/mnt/frappe-axe/env/lib/python3.12/site-packages/redis/connection.py", line 277, in connect
+    sock = self.retry.call_with_retry(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/frappe-axe/env/lib/python3.12/site-packages/redis/retry.py", line 62, in call_with_retry
+    return do()
+           ^^^^
+  File "/mnt/frappe-axe/env/lib/python3.12/site-packages/redis/connection.py", line 278, in <lambda>
+    lambda: self._connect(), lambda error: self.disconnect(error)
+            ^^^^^^^^^^^^^^^
+  File "/mnt/frappe-axe/env/lib/python3.12/site-packages/redis/connection.py", line 639, in _connect
+    raise err
+  File "/mnt/frappe-axe/env/lib/python3.12/site-packages/redis/connection.py", line 627, in _connect
+    sock.connect(socket_address)
+ConnectionRefusedError: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mnt/frappe-axe/apps/frappe/frappe/utils/scheduler.py", line 109, in enqueue_events_for_site
+    enqueue_events()
+  File "/mnt/frappe-axe/apps/frappe/frappe/utils/scheduler.py", line 129, in enqueue_events
+    if job_type.enqueue():
+       ^^^^^^^^^^^^^^^^^^
+  File "/mnt/frappe-axe/apps/frappe/frappe/core/doctype/scheduled_job_type/scheduled_job_type.py", line 70, in enqueue
+    if not self.is_job_in_queue():
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/frappe-axe/apps/frappe/frappe/core/doctype/scheduled_job_type/scheduled_job_type.py", line 92, in is_job_in_queue
+    return is_job_enqueued(self.rq_job_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/frappe-axe/apps/frappe/frappe/utils/background_jobs.py", line 603, in is_job_enqueued
+    return get_job_status(job_id) in (JobStatus.QUEUED, JobStatus.STARTED)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/frappe-axe/apps/frappe/frappe/utils/background_jobs.py", line 608, in get_job_status
+    if job := get_job(job_id):
+              ^^^^^^^^^^^^^^^
+  File "/mnt/frappe-axe/apps/frappe/frappe/utils/background_jobs.py", line 614, in get_job
+    return Job.fetch(create_job_id(job_id), connection=get_redis_conn())
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/frappe-axe/env/lib/python3.12/site-packages/rq/job.py", line 591, in fetch
+    job.refresh()
+  File "/mnt/frappe-axe/env/lib/python3.12/site-packages/rq/job.py", line 991, in refresh
+    data = self.connection.hgetall(self.key)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/frappe-axe/env/lib/python3.12/site-packages/redis/commands/core.py", line 4966, in hgetall
+    return self.execute_command("HGETALL", name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/frappe-axe/env/lib/python3.12/site-packages/redis/client.py", line 545, in execute_command
+    conn = self.connection or pool.get_connection(command_name, **options)
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/frappe-axe/env/lib/python3.12/site-packages/redis/connection.py", line 1074, in get_connection
+    connection.connect()
+  File "/mnt/frappe-axe/env/lib/python3.12/site-packages/redis/connection.py", line 283, in connect
+    raise ConnectionError(self._error_message(e))
+redis.exceptions.ConnectionError: Error 111 connecting to 127.0.0.1:11001. Connection refused.
+2024-10-28 10:50:00,513 ERROR scheduler Exception in Enqueue Events for Site localhost
+Traceback (most recent call last):
+  File "/mnt/frappe-axe/env/lib/python3.12/site-packages/redis/connection.py", line 277, in connect
+    sock = self.retry.call_with_retry(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/frappe-axe/env/lib/python3.12/site-packages/redis/retry.py", line 62, in call_with_retry
+    return do()
+           ^^^^
+  File "/mnt/frappe-axe/env/lib/python3.12/site-packages/redis/connection.py", line 278, in <lambda>
+    lambda: self._connect(), lambda error: self.disconnect(error)
+            ^^^^^^^^^^^^^^^
+  File "/mnt/frappe-axe/env/lib/python3.12/site-packages/redis/connection.py", line 639, in _connect
+    raise err
+  File "/mnt/frappe-axe/env/lib/python3.12/site-packages/redis/connection.py", line 627, in _connect
+    sock.connect(socket_address)
+ConnectionRefusedError: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mnt/frappe-axe/apps/frappe/frappe/utils/scheduler.py", line 109, in enqueue_events_for_site
+    enqueue_events()
+  File "/mnt/frappe-axe/apps/frappe/frappe/utils/scheduler.py", line 129, in enqueue_events
+    if job_type.enqueue():
+       ^^^^^^^^^^^^^^^^^^
+  File "/mnt/frappe-axe/apps/frappe/frappe/core/doctype/scheduled_job_type/scheduled_job_type.py", line 70, in enqueue
+    if not self.is_job_in_queue():
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/frappe-axe/apps/frappe/frappe/core/doctype/scheduled_job_type/scheduled_job_type.py", line 92, in is_job_in_queue
+    return is_job_enqueued(self.rq_job_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/frappe-axe/apps/frappe/frappe/utils/background_jobs.py", line 603, in is_job_enqueued
+    return get_job_status(job_id) in (JobStatus.QUEUED, JobStatus.STARTED)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/frappe-axe/apps/frappe/frappe/utils/background_jobs.py", line 608, in get_job_status
+    if job := get_job(job_id):
+              ^^^^^^^^^^^^^^^
+  File "/mnt/frappe-axe/apps/frappe/frappe/utils/background_jobs.py", line 614, in get_job
+    return Job.fetch(create_job_id(job_id), connection=get_redis_conn())
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/frappe-axe/env/lib/python3.12/site-packages/rq/job.py", line 591, in fetch
+    job.refresh()
+  File "/mnt/frappe-axe/env/lib/python3.12/site-packages/rq/job.py", line 991, in refresh
+    data = self.connection.hgetall(self.key)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/frappe-axe/env/lib/python3.12/site-packages/redis/commands/core.py", line 4966, in hgetall
+    return self.execute_command("HGETALL", name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/frappe-axe/env/lib/python3.12/site-packages/redis/client.py", line 545, in execute_command
+    conn = self.connection or pool.get_connection(command_name, **options)
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/frappe-axe/env/lib/python3.12/site-packages/redis/connection.py", line 1074, in get_connection
+    connection.connect()
+  File "/mnt/frappe-axe/env/lib/python3.12/site-packages/redis/connection.py", line 283, in connect
+    raise ConnectionError(self._error_message(e))
+redis.exceptions.ConnectionError: Error 111 connecting to 127.0.0.1:11001. Connection refused.
+2024-10-28 10:54:01,407 ERROR scheduler Exception in Enqueue Events for Site localhost
+Traceback (most recent call last):
+  File "/mnt/frappe-axe/env/lib/python3.12/site-packages/redis/connection.py", line 277, in connect
+    sock = self.retry.call_with_retry(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/frappe-axe/env/lib/python3.12/site-packages/redis/retry.py", line 62, in call_with_retry
+    return do()
+           ^^^^
+  File "/mnt/frappe-axe/env/lib/python3.12/site-packages/redis/connection.py", line 278, in <lambda>
+    lambda: self._connect(), lambda error: self.disconnect(error)
+            ^^^^^^^^^^^^^^^
+  File "/mnt/frappe-axe/env/lib/python3.12/site-packages/redis/connection.py", line 639, in _connect
+    raise err
+  File "/mnt/frappe-axe/env/lib/python3.12/site-packages/redis/connection.py", line 627, in _connect
+    sock.connect(socket_address)
+ConnectionRefusedError: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mnt/frappe-axe/apps/frappe/frappe/utils/scheduler.py", line 109, in enqueue_events_for_site
+    enqueue_events()
+  File "/mnt/frappe-axe/apps/frappe/frappe/utils/scheduler.py", line 129, in enqueue_events
+    if job_type.enqueue():
+       ^^^^^^^^^^^^^^^^^^
+  File "/mnt/frappe-axe/apps/frappe/frappe/core/doctype/scheduled_job_type/scheduled_job_type.py", line 70, in enqueue
+    if not self.is_job_in_queue():
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/frappe-axe/apps/frappe/frappe/core/doctype/scheduled_job_type/scheduled_job_type.py", line 92, in is_job_in_queue
+    return is_job_enqueued(self.rq_job_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/frappe-axe/apps/frappe/frappe/utils/background_jobs.py", line 603, in is_job_enqueued
+    return get_job_status(job_id) in (JobStatus.QUEUED, JobStatus.STARTED)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/frappe-axe/apps/frappe/frappe/utils/background_jobs.py", line 608, in get_job_status
+    if job := get_job(job_id):
+              ^^^^^^^^^^^^^^^
+  File "/mnt/frappe-axe/apps/frappe/frappe/utils/background_jobs.py", line 614, in get_job
+    return Job.fetch(create_job_id(job_id), connection=get_redis_conn())
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/frappe-axe/env/lib/python3.12/site-packages/rq/job.py", line 591, in fetch
+    job.refresh()
+  File "/mnt/frappe-axe/env/lib/python3.12/site-packages/rq/job.py", line 991, in refresh
+    data = self.connection.hgetall(self.key)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/frappe-axe/env/lib/python3.12/site-packages/redis/commands/core.py", line 4966, in hgetall
+    return self.execute_command("HGETALL", name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/frappe-axe/env/lib/python3.12/site-packages/redis/client.py", line 545, in execute_command
+    conn = self.connection or pool.get_connection(command_name, **options)
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/frappe-axe/env/lib/python3.12/site-packages/redis/connection.py", line 1074, in get_connection
+    connection.connect()
+  File "/mnt/frappe-axe/env/lib/python3.12/site-packages/redis/connection.py", line 283, in connect
+    raise ConnectionError(self._error_message(e))
+redis.exceptions.ConnectionError: Error 111 connecting to 127.0.0.1:11001. Connection refused.
+2024-11-07 16:50:03,489 ERROR scheduler Skipped queueing frappe.utils.global_search.sync_global_search because it was found in queue for localhost
+2024-11-07 16:50:04,123 ERROR scheduler Skipped queueing frappe.deferred_insert.save_to_db because it was found in queue for localhost
+2024-11-07 16:50:04,138 ERROR scheduler Skipped queueing frappe.social.doctype.energy_point_settings.energy_point_settings.allocate_review_points because it was found in queue for localhost
+2024-11-07 16:50:04,152 ERROR scheduler Skipped queueing frappe.desk.form.document_follow.send_daily_updates because it was found in queue for localhost
+2024-11-07 16:50:04,172 ERROR scheduler Skipped queueing frappe.integrations.doctype.s3_backup_settings.s3_backup_settings.take_backups_daily because it was found in queue for localhost
+2024-11-07 16:50:04,201 ERROR scheduler Skipped queueing frappe.website.doctype.web_page.web_page.check_publish_status because it was found in queue for localhost
+2024-11-07 16:50:04,221 ERROR scheduler Skipped queueing frappe.desk.page.backups.backups.delete_downloadable_backups because it was found in queue for localhost
+2024-11-07 16:50:04,238 ERROR scheduler Skipped queueing frappe.desk.form.document_follow.send_hourly_updates because it was found in queue for localhost
+2024-11-07 16:50:04,255 ERROR scheduler Skipped queueing frappe.integrations.doctype.google_drive.google_drive.daily_backup because it was found in queue for localhost
+2024-11-07 16:50:04,274 ERROR scheduler Skipped queueing frappe.social.doctype.energy_point_log.energy_point_log.send_weekly_summary because it was found in queue for localhost
+2024-11-07 16:50:04,291 ERROR scheduler Skipped queueing frappe.utils.change_log.check_for_update because it was found in queue for localhost
+2024-11-07 16:50:04,313 ERROR scheduler Skipped queueing frappe.integrations.doctype.google_calendar.google_calendar.sync because it was found in queue for localhost
+2024-11-07 16:50:04,332 ERROR scheduler Skipped queueing frappe.desk.doctype.event.event.send_event_digest because it was found in queue for localhost
+2024-11-07 16:50:04,342 ERROR scheduler Skipped queueing frappe.integrations.doctype.dropbox_settings.dropbox_settings.take_backups_weekly because it was found in queue for localhost
+2024-11-07 16:50:04,352 ERROR scheduler Skipped queueing frappe.email.doctype.notification.notification.trigger_daily_alerts because it was found in queue for localhost
+2024-11-07 16:50:04,364 ERROR scheduler Skipped queueing frappe.sessions.clear_expired_sessions because it was found in queue for localhost
+2024-11-07 16:50:04,376 ERROR scheduler Skipped queueing frappe.desk.doctype.changelog_feed.changelog_feed.fetch_changelog_feed because it was found in queue for localhost
+2024-11-07 16:50:04,385 ERROR scheduler Skipped queueing frappe.desk.form.document_follow.send_weekly_updates because it was found in queue for localhost
+2024-11-07 16:50:04,393 ERROR scheduler Skipped queueing frappe.model.utils.user_settings.sync_user_settings because it was found in queue for localhost
+2024-11-07 16:50:04,401 ERROR scheduler Skipped queueing frappe.integrations.doctype.dropbox_settings.dropbox_settings.take_backups_daily because it was found in queue for localhost
+2024-11-07 16:50:04,412 ERROR scheduler Skipped queueing frappe.website.doctype.personal_data_deletion_request.personal_data_deletion_request.remove_unverified_record because it was found in queue for localhost
+2024-11-07 16:50:04,422 ERROR scheduler Skipped queueing frappe.website.doctype.personal_data_deletion_request.personal_data_deletion_request.process_data_deletion_request because it was found in queue for localhost
+2024-11-07 16:50:04,433 ERROR scheduler Skipped queueing frappe.email.doctype.auto_email_report.auto_email_report.send_daily because it was found in queue for localhost
+2024-11-07 16:50:04,442 ERROR scheduler Skipped queueing frappe.monitor.flush because it was found in queue for localhost
+2024-11-07 16:50:04,454 ERROR scheduler Skipped queueing frappe.email.doctype.auto_email_report.auto_email_report.send_monthly because it was found in queue for localhost
+2024-11-07 16:50:04,464 ERROR scheduler Skipped queueing frappe.automation.doctype.reminder.reminder.send_reminders because it was found in queue for localhost
+2024-11-07 16:50:04,475 ERROR scheduler Skipped queueing frappe.integrations.doctype.google_drive.google_drive.weekly_backup because it was found in queue for localhost
+2024-11-07 16:50:04,487 ERROR scheduler Skipped queueing frappe.automation.doctype.auto_repeat.auto_repeat.set_auto_repeat_as_completed because it was found in queue for localhost
+2024-11-07 16:50:04,496 ERROR scheduler Skipped queueing frappe.twofactor.delete_all_barcodes_for_users because it was found in queue for localhost
+2024-11-07 16:50:04,507 ERROR scheduler Skipped queueing frappe.integrations.doctype.s3_backup_settings.s3_backup_settings.take_backups_monthly because it was found in queue for localhost
+2024-11-07 16:50:04,520 ERROR scheduler Skipped queueing frappe.email.queue.flush because it was found in queue for localhost
+2024-11-07 16:50:04,536 ERROR scheduler Skipped queueing frappe.automation.doctype.auto_repeat.auto_repeat.make_auto_repeat_entry because it was found in queue for localhost
+2024-11-07 16:50:04,546 ERROR scheduler Skipped queueing frappe.integrations.doctype.s3_backup_settings.s3_backup_settings.take_backups_weekly because it was found in queue for localhost
+2024-11-07 16:50:04,556 ERROR scheduler Skipped queueing frappe.email.doctype.newsletter.newsletter.send_scheduled_email because it was found in queue for localhost
+2024-11-07 16:50:04,568 ERROR scheduler Skipped queueing frappe.core.doctype.prepared_report.prepared_report.expire_stalled_report because it was found in queue for localhost
+2024-11-07 16:50:04,577 ERROR scheduler Skipped queueing frappe.social.doctype.energy_point_log.energy_point_log.send_monthly_summary because it was found in queue for localhost
+2024-11-07 16:50:04,587 ERROR scheduler Skipped queueing frappe.core.doctype.log_settings.log_settings.run_log_clean_up because it was found in queue for localhost
+2024-11-07 16:50:04,595 ERROR scheduler Skipped queueing frappe.desk.notifications.clear_notifications because it was found in queue for localhost
+2024-11-07 16:50:04,606 ERROR scheduler Skipped queueing frappe.email.doctype.email_account.email_account.pull because it was found in queue for localhost
+2024-11-07 16:50:04,615 ERROR scheduler Skipped queueing frappe.integrations.doctype.google_contacts.google_contacts.sync because it was found in queue for localhost
+2024-11-07 16:50:04,626 ERROR scheduler Skipped queueing frappe.oauth.delete_oauth2_data because it was found in queue for localhost
+2024-11-07 16:50:04,634 ERROR scheduler Skipped queueing frappe.model.utils.link_count.update_link_count because it was found in queue for localhost
+2024-11-07 16:50:04,654 ERROR scheduler Skipped queueing frappe.email.doctype.email_account.email_account.notify_unreplied because it was found in queue for localhost
+2024-11-07 16:50:04,668 ERROR scheduler Skipped queueing frappe.email.doctype.notification.notification.trigger_offset_alerts because it was found in queue for localhost
+2024-11-07 16:54:10,540 ERROR scheduler Skipped queueing frappe.integrations.doctype.google_drive.google_drive.daily_backup because it was found in queue for localhost
+2024-11-07 16:54:10,555 ERROR scheduler Skipped queueing frappe.integrations.doctype.google_drive.google_drive.weekly_backup because it was found in queue for localhost
+2024-11-07 16:54:10,572 ERROR scheduler Skipped queueing frappe.utils.change_log.check_for_update because it was found in queue for localhost
+2024-11-07 16:54:10,663 ERROR scheduler Skipped queueing frappe.desk.form.document_follow.send_weekly_updates because it was found in queue for localhost
+2024-11-07 16:54:10,691 ERROR scheduler Skipped queueing frappe.social.doctype.energy_point_log.energy_point_log.send_weekly_summary because it was found in queue for localhost
+2024-11-07 16:54:10,698 ERROR scheduler Skipped queueing frappe.integrations.doctype.dropbox_settings.dropbox_settings.take_backups_weekly because it was found in queue for localhost
+2024-11-07 16:54:10,709 ERROR scheduler Skipped queueing frappe.integrations.doctype.dropbox_settings.dropbox_settings.take_backups_daily because it was found in queue for localhost
+2024-11-07 16:54:10,717 ERROR scheduler Skipped queueing frappe.desk.doctype.changelog_feed.changelog_feed.fetch_changelog_feed because it was found in queue for localhost
+2024-11-07 16:54:10,732 ERROR scheduler Skipped queueing frappe.integrations.doctype.s3_backup_settings.s3_backup_settings.take_backups_weekly because it was found in queue for localhost
+2024-11-07 16:54:10,794 ERROR scheduler Skipped queueing frappe.email.doctype.auto_email_report.auto_email_report.send_daily because it was found in queue for localhost
+2024-11-07 16:54:10,825 ERROR scheduler Skipped queueing frappe.integrations.doctype.s3_backup_settings.s3_backup_settings.take_backups_daily because it was found in queue for localhost
+2024-11-07 16:54:10,854 ERROR scheduler Skipped queueing frappe.integrations.doctype.s3_backup_settings.s3_backup_settings.take_backups_monthly because it was found in queue for localhost

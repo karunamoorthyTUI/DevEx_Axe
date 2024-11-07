@@ -1,0 +1,76 @@
+2024-10-18 14:56:30,093 WARNING database DDL Query made to DB:
+ALTER TABLE `tabDSV Restriction` MODIFY `status_` tinyint NOT NULL DEFAULT 1
+2024-10-18 14:56:34,541 WARNING database DDL Query made to DB:
+ALTER TABLE `tabDSV Restriction` MODIFY `status_` tinyint NOT NULL DEFAULT 1
+2024-10-18 14:57:39,767 WARNING database DDL Query made to DB:
+ALTER TABLE `tabDSV Restriction` MODIFY `status_` tinyint NOT NULL DEFAULT 1
+2024-10-18 15:36:43,947 WARNING database DDL Query made to DB:
+ALTER TABLE `tabLocation` MODIFY `has_restrictions` tinyint NOT NULL DEFAULT 0
+2024-10-18 15:37:00,932 WARNING database DDL Query made to DB:
+ALTER TABLE `tabLocation` MODIFY `has_restrictions` tinyint NOT NULL DEFAULT 0
+2024-10-18 15:38:39,045 WARNING database DDL Query made to DB:
+ALTER TABLE `tabLocation` MODIFY `has_restrictions` varchar(140) DEFAULT 'No'
+2024-10-18 15:57:26,747 WARNING database DDL Query made to DB:
+alter table `tabSupplies` add column if not exists parent varchar(140)
+2024-10-18 15:57:26,748 WARNING database DDL Query made to DB:
+alter table `tabSupplies` add column if not exists parenttype varchar(140)
+2024-10-18 15:57:26,749 WARNING database DDL Query made to DB:
+alter table `tabSupplies` add column if not exists parentfield varchar(140)
+2024-10-18 15:57:27,206 WARNING database DDL Query made to DB:
+ALTER TABLE `tabSupplies` MODIFY `quantity` int NOT NULL DEFAULT 0
+2024-10-18 16:03:07,725 WARNING database DDL Query made to DB:
+alter table `tabSupplies` add column if not exists parent varchar(140)
+2024-10-18 16:03:07,727 WARNING database DDL Query made to DB:
+alter table `tabSupplies` add column if not exists parenttype varchar(140)
+2024-10-18 16:03:07,728 WARNING database DDL Query made to DB:
+alter table `tabSupplies` add column if not exists parentfield varchar(140)
+2024-10-18 16:03:08,119 WARNING database DDL Query made to DB:
+ALTER TABLE `tabSupplies` MODIFY `quantity` int NOT NULL DEFAULT 0
+2024-10-21 10:05:14,588 WARNING database DDL Query made to DB:
+alter table `tabContact Child` add column if not exists parent varchar(140)
+2024-10-21 10:05:14,675 WARNING database DDL Query made to DB:
+alter table `tabContact Child` add column if not exists parenttype varchar(140)
+2024-10-21 10:05:14,676 WARNING database DDL Query made to DB:
+alter table `tabContact Child` add column if not exists parentfield varchar(140)
+2024-10-21 10:10:18,872 WARNING database DDL Query made to DB:
+alter table `tabContact Child` add column if not exists parent varchar(140)
+2024-10-21 10:10:18,873 WARNING database DDL Query made to DB:
+alter table `tabContact Child` add column if not exists parenttype varchar(140)
+2024-10-21 10:10:18,874 WARNING database DDL Query made to DB:
+alter table `tabContact Child` add column if not exists parentfield varchar(140)
+2024-10-24 09:54:58,254 WARNING database DDL Query made to DB:
+create table `tabFrappe Crud` (
+			name varchar(140) primary key,
+			creation datetime(6),
+			modified datetime(6),
+			modified_by varchar(140),
+			owner varchar(140),
+			docstatus tinyint not null default '0',
+			idx int not null default '0',
+			`_user_tags` text,
+`_comments` text,
+`_assign` text,
+`_liked_by` text,
+index creation(creation))
+			ENGINE=InnoDB
+			ROW_FORMAT=DYNAMIC
+			CHARACTER SET=utf8mb4
+			COLLATE=utf8mb4_unicode_ci
+2024-10-24 09:55:59,794 WARNING database DDL Query made to DB:
+ALTER TABLE `tabFrappe Crud` ADD COLUMN `name1` varchar(140), ADD COLUMN `type` varchar(140)
+2024-10-24 09:56:29,162 WARNING database DDL Query made to DB:
+ALTER TABLE `tabFrappe Crud` ADD UNIQUE INDEX IF NOT EXISTS name1 (`name1`)
+2024-10-25 10:22:13,079 WARNING database DDL Query made to DB:
+ALTER TABLE `tabFrappe Crud` ADD COLUMN `name_1` varchar(140) UNIQUE
+2024-10-25 10:22:13,176 WARNING database DDL Query made to DB:
+ALTER TABLE `tabFrappe Crud` ADD UNIQUE INDEX IF NOT EXISTS name_1 (`name_1`)
+2024-10-25 10:27:44,931 WARNING database DDL Query made to DB:
+create sequence if not exists frappe_crud_id_seq nocache nocycle
+2024-10-25 10:27:45,352 WARNING database DDL Query made to DB:
+ALTER TABLE `tabFrappe Crud` MODIFY `name` bigint
+2024-10-25 12:00:31,871 WARNING database DDL Query made to DB:
+ALTER TABLE `tabFrappe Crud` MODIFY `name` varchar(140)
+2024-10-25 16:25:34,493 WARNING database DDL Query made to DB:
+create sequence if not exists frappe_crud_id_seq nocache nocycle
+2024-10-25 16:25:35,151 WARNING database DDL Query made to DB:
+ALTER TABLE `tabFrappe Crud` MODIFY `name` bigint

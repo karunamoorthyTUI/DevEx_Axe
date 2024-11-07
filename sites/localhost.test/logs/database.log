@@ -1,0 +1,235 @@
+2024-10-17 13:26:58,650 WARNING database DDL Query made to DB:
+create table `tabProduct Details` (
+			name varchar(140) primary key,
+			creation datetime(6),
+			modified datetime(6),
+			modified_by varchar(140),
+			owner varchar(140),
+			docstatus tinyint not null default '0',
+			idx int not null default '0',
+			`product` varchar(140),
+`product_category` varchar(140),
+`product_tags` text,
+parent varchar(140),
+parentfield varchar(140),
+parenttype varchar(140),
+index parent(parent))
+			ENGINE=InnoDB
+			ROW_FORMAT=DYNAMIC
+			CHARACTER SET=utf8mb4
+			COLLATE=utf8mb4_unicode_ci
+2024-10-17 13:26:59,283 WARNING database DDL Query made to DB:
+create table `tabService Template` (
+			name varchar(140) primary key,
+			creation datetime(6),
+			modified datetime(6),
+			modified_by varchar(140),
+			owner varchar(140),
+			docstatus tinyint not null default '0',
+			idx int not null default '0',
+			`name1` varchar(140),
+`product_service` varchar(140),
+`service_price` decimal(21,9) NOT NULL DEFAULT 0.0,
+parent varchar(140),
+parentfield varchar(140),
+parenttype varchar(140),
+index parent(parent))
+			ENGINE=InnoDB
+			ROW_FORMAT=DYNAMIC
+			CHARACTER SET=utf8mb4
+			COLLATE=utf8mb4_unicode_ci
+2024-10-17 13:27:00,237 WARNING database DDL Query made to DB:
+create table `tabSales Order` (
+			name varchar(140) primary key,
+			creation datetime(6),
+			modified datetime(6),
+			modified_by varchar(140),
+			owner varchar(140),
+			docstatus tinyint not null default '0',
+			idx int not null default '0',
+			`account` varchar(140),
+`effective_date` date,
+`tags` varchar(140),
+`payment_terms` int NOT NULL DEFAULT 0,
+`order_alerts` varchar(140),
+`location` varchar(140),
+`expiration_date` date,
+`sla_days` int NOT NULL DEFAULT 0,
+`client_ref` varchar(140),
+`incoterms` varchar(140),
+`shipping_facilities` varchar(140),
+`sales` varchar(140),
+`csr` varchar(140),
+`so_tags` varchar(140),
+`naming_series` varchar(140),
+`so_notes` text,
+`amended_from` varchar(140),
+`_user_tags` text,
+`_comments` text,
+`_assign` text,
+`_liked_by` text,
+index `amended_from`(`amended_from`),
+index creation(creation),
+index modified(modified))
+			ENGINE=InnoDB
+			ROW_FORMAT=DYNAMIC
+			CHARACTER SET=utf8mb4
+			COLLATE=utf8mb4_unicode_ci
+2024-10-17 13:27:00,804 WARNING database DDL Query made to DB:
+create table `tabLocation Details` (
+			name varchar(140) primary key,
+			creation datetime(6),
+			modified datetime(6),
+			modified_by varchar(140),
+			owner varchar(140),
+			docstatus tinyint not null default '0',
+			idx int not null default '0',
+			`location` varchar(140),
+parent varchar(140),
+parentfield varchar(140),
+parenttype varchar(140),
+index parent(parent))
+			ENGINE=InnoDB
+			ROW_FORMAT=DYNAMIC
+			CHARACTER SET=utf8mb4
+			COLLATE=utf8mb4_unicode_ci
+2024-10-17 13:27:01,612 WARNING database DDL Query made to DB:
+create table `tabPurchase Order` (
+			name varchar(140) primary key,
+			creation datetime(6),
+			modified datetime(6),
+			modified_by varchar(140),
+			owner varchar(140),
+			docstatus tinyint not null default '0',
+			idx int not null default '0',
+			`account` varchar(140),
+`expiration_date` date,
+`po_tags` varchar(140),
+`location` varchar(140),
+`naming_series` varchar(140),
+`effective_date` date,
+`client_ref` varchar(140),
+`csr` varchar(140),
+`incoterms` varchar(140),
+`receiving_facility` varchar(140),
+`sales` varchar(140),
+`payment_terms` int NOT NULL DEFAULT 0,
+`order_alerts` varchar(140),
+`po_notes` text,
+`po_template` varchar(140),
+`amended_from` varchar(140),
+`_user_tags` text,
+`_comments` text,
+`_assign` text,
+`_liked_by` text,
+index `amended_from`(`amended_from`),
+index creation(creation),
+index modified(modified))
+			ENGINE=InnoDB
+			ROW_FORMAT=DYNAMIC
+			CHARACTER SET=utf8mb4
+			COLLATE=utf8mb4_unicode_ci
+2024-10-17 13:27:02,100 WARNING database DDL Query made to DB:
+create table `tabProduct Tags` (
+			name varchar(140) primary key,
+			creation datetime(6),
+			modified datetime(6),
+			modified_by varchar(140),
+			owner varchar(140),
+			docstatus tinyint not null default '0',
+			idx int not null default '0',
+			`product_tags` varchar(140),
+parent varchar(140),
+parentfield varchar(140),
+parenttype varchar(140),
+index parent(parent))
+			ENGINE=InnoDB
+			ROW_FORMAT=DYNAMIC
+			CHARACTER SET=utf8mb4
+			COLLATE=utf8mb4_unicode_ci
+2024-10-17 13:27:04,552 WARNING database DDL Query made to DB:
+ALTER TABLE `tabContact` ADD COLUMN `custom_billing_contact` tinyint NOT NULL DEFAULT 0
+2024-10-17 13:27:04,763 WARNING database DDL Query made to DB:
+ALTER TABLE `tabContact` MODIFY `pulled_from_google_contacts` tinyint NOT NULL DEFAULT 0, MODIFY `unsubscribed` tinyint NOT NULL DEFAULT 0, MODIFY `is_primary_contact` tinyint NOT NULL DEFAULT 0, MODIFY `sync_with_google_contacts` tinyint NOT NULL DEFAULT 0
+2024-10-17 13:27:05,495 WARNING database DDL Query made to DB:
+ALTER TABLE `tabContact` ADD COLUMN `custom_main_contact` tinyint NOT NULL DEFAULT 0
+2024-10-17 13:27:05,673 WARNING database DDL Query made to DB:
+ALTER TABLE `tabContact` MODIFY `unsubscribed` tinyint NOT NULL DEFAULT 0, MODIFY `sync_with_google_contacts` tinyint NOT NULL DEFAULT 0, MODIFY `pulled_from_google_contacts` tinyint NOT NULL DEFAULT 0, MODIFY `custom_billing_contact` tinyint NOT NULL DEFAULT 0, MODIFY `is_primary_contact` tinyint NOT NULL DEFAULT 0
+2024-10-17 13:27:06,050 WARNING database DDL Query made to DB:
+ALTER TABLE `tabContact` MODIFY `pulled_from_google_contacts` tinyint NOT NULL DEFAULT 0, MODIFY `sync_with_google_contacts` tinyint NOT NULL DEFAULT 0, MODIFY `custom_billing_contact` tinyint NOT NULL DEFAULT 0, MODIFY `unsubscribed` tinyint NOT NULL DEFAULT 0, MODIFY `custom_main_contact` tinyint NOT NULL DEFAULT 0, MODIFY `is_primary_contact` tinyint NOT NULL DEFAULT 0
+2024-10-17 13:27:06,486 WARNING database DDL Query made to DB:
+ALTER TABLE `tabContact` MODIFY `unsubscribed` tinyint NOT NULL DEFAULT 0, MODIFY `pulled_from_google_contacts` tinyint NOT NULL DEFAULT 0, MODIFY `sync_with_google_contacts` tinyint NOT NULL DEFAULT 0, MODIFY `is_primary_contact` tinyint NOT NULL DEFAULT 0, MODIFY `custom_main_contact` tinyint NOT NULL DEFAULT 0, MODIFY `custom_billing_contact` tinyint NOT NULL DEFAULT 0
+2024-10-17 13:27:07,159 WARNING database DDL Query made to DB:
+ALTER TABLE `tabContact` MODIFY `is_primary_contact` tinyint NOT NULL DEFAULT 0, MODIFY `custom_billing_contact` tinyint NOT NULL DEFAULT 0, MODIFY `custom_main_contact` tinyint NOT NULL DEFAULT 0, MODIFY `sync_with_google_contacts` tinyint NOT NULL DEFAULT 0, MODIFY `unsubscribed` tinyint NOT NULL DEFAULT 0, MODIFY `pulled_from_google_contacts` tinyint NOT NULL DEFAULT 0
+2024-10-17 13:28:58,980 WARNING database DDL Query made to DB:
+DROP TABLE IF EXISTS `tabAttachments`
+2024-10-17 13:28:59,376 WARNING database DDL Query made to DB:
+DROP TABLE IF EXISTS `tabService Details`
+2024-10-17 13:28:59,775 WARNING database DDL Query made to DB:
+DROP TABLE IF EXISTS `tabSales Order Item`
+2024-10-17 13:29:00,287 WARNING database DDL Query made to DB:
+DROP TABLE IF EXISTS `tabPO Template Details`
+2024-10-17 13:29:00,941 WARNING database DDL Query made to DB:
+DROP TABLE IF EXISTS `tabLocation`
+2024-10-17 13:29:01,329 WARNING database DDL Query made to DB:
+DROP TABLE IF EXISTS `tabSelected Items Link`
+2024-10-17 13:29:01,830 WARNING database DDL Query made to DB:
+DROP TABLE IF EXISTS `tabContact Details`
+2024-10-17 13:29:02,804 WARNING database DDL Query made to DB:
+DROP TABLE IF EXISTS `tabUOM`
+2024-10-17 13:29:03,608 WARNING database DDL Query made to DB:
+DROP TABLE IF EXISTS `tabAccounts`
+2024-10-17 13:29:03,969 WARNING database DDL Query made to DB:
+DROP TABLE IF EXISTS `tabAccount Type`
+2024-10-17 13:29:04,687 WARNING database DDL Query made to DB:
+DROP TABLE IF EXISTS `tabSales Order`
+2024-10-17 13:29:05,112 WARNING database DDL Query made to DB:
+DROP TABLE IF EXISTS `tabProduct Service`
+2024-10-17 13:29:05,467 WARNING database DDL Query made to DB:
+DROP TABLE IF EXISTS `tabService Template`
+2024-10-17 13:29:06,067 WARNING database DDL Query made to DB:
+DROP TABLE IF EXISTS `tabLocation Details`
+2024-10-17 13:29:06,603 WARNING database DDL Query made to DB:
+DROP TABLE IF EXISTS `tabPurchase Order Item`
+2024-10-17 13:29:07,483 WARNING database DDL Query made to DB:
+DROP TABLE IF EXISTS `tabPO Product Attributes`
+2024-10-17 13:29:09,150 WARNING database DDL Query made to DB:
+DROP TABLE IF EXISTS `tabProduct Category`
+2024-10-17 13:29:10,409 WARNING database DDL Query made to DB:
+DROP TABLE IF EXISTS `tabGroups`
+2024-10-17 13:29:11,159 WARNING database DDL Query made to DB:
+DROP TABLE IF EXISTS `tabTags`
+2024-10-17 13:29:11,713 WARNING database DDL Query made to DB:
+DROP TABLE IF EXISTS `tabDSV Restrictions`
+2024-10-17 13:29:12,349 WARNING database DDL Query made to DB:
+DROP TABLE IF EXISTS `tabEmployee`
+2024-10-17 13:29:12,679 WARNING database DDL Query made to DB:
+DROP TABLE IF EXISTS `tabPO Templates`
+2024-10-17 13:29:13,311 WARNING database DDL Query made to DB:
+DROP TABLE IF EXISTS `tabAccount Details`
+2024-10-17 13:29:13,777 WARNING database DDL Query made to DB:
+DROP TABLE IF EXISTS `tabProduct Details`
+2024-10-17 13:29:14,045 WARNING database DDL Query made to DB:
+DROP TABLE IF EXISTS `tabAttribute Detais`
+2024-10-17 13:29:14,684 WARNING database DDL Query made to DB:
+DROP TABLE IF EXISTS `tabProduct`
+2024-10-17 13:29:15,045 WARNING database DDL Query made to DB:
+DROP TABLE IF EXISTS `tabProduct Tags`
+2024-10-17 13:29:15,497 WARNING database DDL Query made to DB:
+DROP TABLE IF EXISTS `tabActive Items`
+2024-10-17 13:29:15,896 WARNING database DDL Query made to DB:
+DROP TABLE IF EXISTS `tabProduct Attributes`
+2024-10-17 13:29:16,328 WARNING database DDL Query made to DB:
+DROP TABLE IF EXISTS `tabSelected Items`
+2024-10-17 13:29:16,727 WARNING database DDL Query made to DB:
+DROP TABLE IF EXISTS `tabInventory`
+2024-10-17 13:29:17,105 WARNING database DDL Query made to DB:
+DROP TABLE IF EXISTS `tabAttributes`
+2024-10-17 13:29:17,615 WARNING database DDL Query made to DB:
+DROP TABLE IF EXISTS `tabPurchase Order`
+2024-10-17 13:29:17,981 WARNING database DDL Query made to DB:
+DROP TABLE IF EXISTS `tabResale`
+2024-10-17 13:29:18,340 WARNING database DDL Query made to DB:
+DROP TABLE IF EXISTS `tabContacts Details`
+2024-10-17 13:29:18,891 WARNING database DDL Query made to DB:
+DROP TABLE IF EXISTS `tabAccount Type Link`

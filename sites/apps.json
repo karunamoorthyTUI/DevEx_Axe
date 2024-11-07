@@ -1,0 +1,71 @@
+{
+    "frappe": {
+        "resolution": {
+            "commit_hash": null,
+            "branch": null
+        },
+        "required": [],
+        "idx": 1,
+        "version": "16.0.0-dev"
+    },
+    "axe": {
+        "is_repo": true,
+        "resolution": {
+            "commit_hash": "786c11026ad5844403203c0fccc054ce34795caa",
+            "branch": "main"
+        },
+        "required": [],
+        "idx": 2,
+        "version": "0.0.1"
+    },
+    "axe_product": {
+        "is_repo": true,
+        "resolution": {
+            "commit_hash": "141a53b7e0f14635f59a781a665f19ad4ff058d6",
+            "branch": "develop"
+        },
+        "required": [],
+        "idx": 3,
+        "version": "0.0.1"
+    },
+    "todo": {
+        "is_repo": true,
+        "resolution": {
+            "commit_hash": "392d5fe49cf4d0775ca5f34dfc41c0e8134dd719",
+            "branch": "develop"
+        },
+        "required": [],
+        "idx": 4,
+        "version": "0.0.1"
+    },
+    "medicalform": {
+        "is_repo": true,
+        "resolution": {
+            "commit_hash": "025f527cab16d6c5f34a1e4b508849346b13b88b",
+            "branch": "main"
+        },
+        "required": [],
+        "idx": 5,
+        "version": "0.0.1"
+    },
+    "erpnext": {
+        "is_repo": true,
+        "resolution": {
+            "commit_hash": "99d1c5f34221d3f450aa74825339209c7595bcb9",
+            "branch": "develop"
+        },
+        "required": [],
+        "idx": 6,
+        "version": "16.0.0-dev"
+    },
+    "healthcare": {
+        "is_repo": true,
+        "resolution": {
+            "commit_hash": "f84faf73f17a0772df0067f6b6c3aa251006df09",
+            "branch": "develop"
+        },
+        "required": [],
+        "idx": 7,
+        "version": "16.0.0-dev"
+    }
+}
